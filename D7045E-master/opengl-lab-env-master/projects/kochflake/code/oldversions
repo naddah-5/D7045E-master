@@ -1,0 +1,58 @@
+std::vector<float32> kochCalc(
+	std::vector<float32> data,
+	GLint iteration, 
+	glm::vec2 a,
+	glm::vec2 b){
+
+	// int verticeCount = (iteration - 1) * 4;
+
+	if (iteration > 1){
+		glm::vec2 c = (a * (0.666667f) + b * (0.333334f));
+
+		// this one wont work, it produces a orthogonal triangle
+		glm::vec2 d = (a * (0.666667f) + b * (0.333334f));
+		glm::vec2 e = (a * (0.333334f) + b * (0.666667f));
+
+		data.push_back(c[0]);
+		data.push_back(c[1]);
+		
+		data.push_back(d[0]);
+		data.push_back(d[1]);
+		
+		data.push_back(e[0]);
+		data.push_back(e[1]);		
+
+		kochCalc(data, iteration-1, a, c);
+		kochCalc(data, iteration-1, c, d);
+		kochCalc(data, iteration-1, d, e);
+		kochCalc(data, iteration-1, e, b);
+		
+
+	}
+	else if (iteration == 1){
+		glm::vec2 c = (a * (0.666667f) + b * (0.333334f));
+		glm::vec2 d = (a + b) * (0.666667f);
+		glm::vec2 e = (a * (0.333334f) + b * (0.666667f));
+
+		data.push_back(c[0]);
+		data.push_back(c[1]);
+		
+		data.push_back(d[0]);
+		data.push_back(d[1]);
+		
+		data.push_back(e[0]);
+		data.push_back(e[1]);
+
+		return data;
+		
+	} else	{
+		//this is the base case, 
+		data.push_back(a[0]);
+		data.push_back(a[1]);
+		
+		data.push_back(b[0]);
+		data.push_back(b[1]);
+
+		return data;
+		
+	}

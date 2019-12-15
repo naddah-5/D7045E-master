@@ -1,0 +1,2 @@
+/usr/bin/ar qc lib2dapp.a  CMakeFiles/2dapp.dir/2dapp.cc.o
+/usr/bin/ranlib lib2dapp.a
